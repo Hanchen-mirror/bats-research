@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {parseLevel,loadConfig,setLevel,levelFor} from '../app/BATS/Assets/web/bats-config.mjs';
+const chars=[{id:10000},{id:10001}], range={min:1,max:90};
+assert.equal(parseLevel(' 50 ',range),50);
+for(const bad of ['',0,91,-1,1.2,'1e1',NaN,Infinity,'9007199254740993'])assert.throws(()=>parseLevel(bad,range));
+const empty=loadConfig('invalid',chars,range);
+assert.equal(levelFor(empty,10000,range),1);
+const updated=setLevel(empty,10000,50,chars,range);
+assert.equal(levelFor(empty,10000,range),1);
+assert.equal(levelFor(loadConfig(JSON.stringify(updated),chars,range),10000,range),50);
+assert.throws(()=>setLevel(empty,999,10,chars,range));
+assert.deepEqual(loadConfig('{"version":1,"levels":{"10000":91,"10001":70,"999":5}}',chars,range),{version:1,levels:{10001:70}});
+assert.deepEqual(loadConfig('{"version":2,"levels":{"10000":80}}',chars,range),empty);
+assert.deepEqual(loadConfig('null',chars,range),empty);
+console.log('PASS: level limits, corrupt saves, unknown characters, persistence, immutability');

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; media-src 'self'; object-src 'none'">
+<title>BATS · 离线大厅</title><link rel="stylesheet" href="style.css"></head><body>
+<aside id="library"><header id="brand-header"><div><small>BA TEST SANDBOX</small><h1>BATS<span>离线大厅</span></h1></div><button id="modules-toggle" aria-expanded="false" aria-controls="modules-menu">模块 ▾</button></header>
+<nav id="modules-menu" hidden aria-label="模块切换"><a href="models.html">学生 3D 模型库</a><a href="tasks.html">任务与角色配置</a></nav>
+<nav><button id="choose">导入资源包</button><button id="demo">内置样本</button><button id="pack">已导入</button></nav>
+<input id="search" type="search" placeholder="中文名 / 表ID / 素材标识" aria-label="搜索角色">
+<div id="filters"><button data-mode="normal_candidate">普通立绘</button><button data-mode="memory_candidate" class="active">记忆大厅</button><button data-mode="all">全部</button></div>
+<button id="favorites-filter" aria-pressed="false">只看收藏</button>
+<div id="counter"></div><div id="opening-status"></div><details id="issues"><summary id="issues-title">资源状态</summary><div id="issues-list"></div></details>
+<div id="list"></div><footer><span id="roster-status">名称相近的素材暂作候选分组</span><br>声音来自本地音频补充包 · 中日配音可切换</footer></aside>
+<main><canvas id="scene"></canvas><div id="top"><button id="toggle" aria-label="展开或收起目录">☰</button><div><h2 id="title">选择一个大厅</h2><p id="detail">首次接入动画播放器</p></div><button id="favorite">☆ 收藏</button><button id="settings-toggle" aria-controls="settings" aria-expanded="false">声音 / 画面</button></div>
+<div id="message" role="status">正在读取本地目录…</div>
+<div id="subtitle" aria-live="polite"></div>
+<div id="footnote">点击人物播放对白 · 普通立绘音乐可自选；记忆大厅按本地表关联 · 镜头、特效及部分口型仍待还原</div></main>
+<aside id="settings" aria-label="声音与画面设置" hidden><div class="settings-header"><h2>声音 / 画面</h2><button id="settings-close" aria-label="收起设置">收起</button></div>
+<details id="audio-panel" open><summary>声音与对白</summary><div class="audio-row"><button id="sound" disabled>开启声音</button><button id="voice-language" aria-label="切换中配日配">配音：中配 ⇄</button><label>语音 <input id="voice-volume" aria-label="语音音量" type="range" min="0" max="1" step=".05" value="1"></label><label>音乐 <input id="bgm-volume" aria-label="音乐音量" type="range" min="0" max="1" step=".05" value=".35"></label></div><div class="audio-row"><label>对白 <select id="dialogue" aria-label="选择对白"></select></label><button id="dialogue-play" disabled>播放对白</button><label>BGM <select id="bgm" aria-label="选择背景音乐"><option value="auto">大厅表指定 / 无指定</option><option value="off">不播放音乐</option></select></label></div><p id="audio-status" role="status">正在检查本地音频…</p></details>
+<section id="view-controls" aria-label="画面设置"><h3>画面与开场</h3><label><input id="composite" type="checkbox" disabled>场景组合预览</label><button id="intro" disabled>开场动作预览</button><label>缩放 <input id="zoom" type="range" min="0.6" max="4" step="0.05" value="1" aria-label="画面缩放"></label><button id="fit">适配画面</button></section><details id="animation-panel"><summary>大厅与动作</summary><div id="controls"><label>大厅 <select id="presentation" aria-label="切换当前组的大厅"></select></label><label>动作 <select id="animation" aria-label="选择动作"></select></label><label>表情 / 皮肤 <select id="skin" aria-label="选择皮肤"></select></label><button id="play">暂停</button><button id="interact">下一段对话</button><button id="reset">复位</button></div></details></aside>
+<script src="spine-webgl.min.js"></script><script type="module" src="viewer.js"></script></body></html>
